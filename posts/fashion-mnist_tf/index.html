@@ -1,0 +1,114 @@
+<!doctype html><html lang=en><head><title>TensorFlow and the Low Level API - Part 1 · AI for HUMANITY</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="Mohamed ABDUL GAFOOR"><meta name=description content="What is TensorFlow?
+TensorFlow is an open-source software library for dataflow and differentiable programming across a range of tasks. It is primarily used for machine learning and deep learning applications. TensorFlow provides a high-level API for building and training machine learning models, as well as a low-level API for defining mathematical operations. With TensorFlow, users can easily build, train, and deploy complex models on a variety of platforms, including desktops, servers, and mobile devices."><meta name=keywords content="blog,developer,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="TensorFlow and the Low Level API - Part 1"><meta name=twitter:description content="What is TensorFlow?
+TensorFlow is an open-source software library for dataflow and differentiable programming across a range of tasks. It is primarily used for machine learning and deep learning applications. TensorFlow provides a high-level API for building and training machine learning models, as well as a low-level API for defining mathematical operations. With TensorFlow, users can easily build, train, and deploy complex models on a variety of platforms, including desktops, servers, and mobile devices."><meta property="og:title" content="TensorFlow and the Low Level API - Part 1"><meta property="og:description" content="What is TensorFlow?
+TensorFlow is an open-source software library for dataflow and differentiable programming across a range of tasks. It is primarily used for machine learning and deep learning applications. TensorFlow provides a high-level API for building and training machine learning models, as well as a low-level API for defining mathematical operations. With TensorFlow, users can easily build, train, and deploy complex models on a variety of platforms, including desktops, servers, and mobile devices."><meta property="og:type" content="article"><meta property="og:url" content="https://AIThoughtLab.github.io/ThinkingAI/posts/fashion-mnist_tf/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-04-01T00:00:00+00:00"><meta property="article:modified_time" content="2019-04-01T00:00:00+00:00"><link rel=canonical href=https://AIThoughtLab.github.io/ThinkingAI/posts/fashion-mnist_tf/><link rel=preload href="https://AIThoughtLab.github.io/ThinkingAI/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=https://AIThoughtLab.github.io/ThinkingAI/css/coder.min.36f76aaf39a14ecf5c3a3c6250dcaf06c238b3d8365d17d646f95cb1874e852b.css integrity="sha256-NvdqrzmhTs9cOjxiUNyvBsI4s9g2XRfWRvlcsYdOhSs=" crossorigin=anonymous media=screen><link rel=stylesheet href=https://AIThoughtLab.github.io/ThinkingAI/css/coder-dark.min.593028e7f7ac55c003b79c230d1cd411bb4ca53b31556c3abb7f027170e646e9.css integrity="sha256-WTAo5/esVcADt5wjDRzUEbtMpTsxVWw6u38CcXDmRuk=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=https://AIThoughtLab.github.io/ThinkingAI/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=https://AIThoughtLab.github.io/ThinkingAI/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=https://AIThoughtLab.github.io/ThinkingAI/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=https://AIThoughtLab.github.io/ThinkingAI/images/apple-touch-icon.png><link rel=manifest href=https://AIThoughtLab.github.io/ThinkingAI/site.webmanifest><link rel=mask-icon href=https://AIThoughtLab.github.io/ThinkingAI/images/safari-pinned-tab.svg color=#5bbad5><meta name=generator content="Hugo 0.110.0"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://AIThoughtLab.github.io/ThinkingAI/>AI for HUMANITY</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/about/>About</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/projects/>Projects</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/innovations/>Innovations</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/personal/>Personal</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/contact/>Contact me</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://AIThoughtLab.github.io/ThinkingAI/posts/fashion-mnist_tf/>TensorFlow and the Low Level API - Part 1</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2019-04-01T00:00:00Z>April 1, 2019</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+5-minute read</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=https://AIThoughtLab.github.io/ThinkingAI/categories/artificial-intelligence/>Artificial Intelligence</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=https://AIThoughtLab.github.io/ThinkingAI/tags/tensorflow/>TensorFlow</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=https://AIThoughtLab.github.io/ThinkingAI/tags/deep-learning/>Deep Learning</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=https://AIThoughtLab.github.io/ThinkingAI/tags/mnist/>MNIST</a></span></div></div></header><div class=post-content><p><strong>What is TensorFlow?</strong></p><p>TensorFlow is an open-source software library for dataflow and differentiable programming across a range of tasks. It is primarily used for machine learning and deep learning applications. TensorFlow provides a high-level API for building and training machine learning models, as well as a low-level API for defining mathematical operations. With TensorFlow, users can easily build, train, and deploy complex models on a variety of platforms, including desktops, servers, and mobile devices. Additionally, TensorFlow has a large community of developers and users, which makes it a popular choice for machine learning projects. We will use TensorFlow to develop a machine learning model using Fashion-MNIST dataset. The Fashion-MNIST is an image dataset consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image (784 pixel values in total), associated with a label from 10 different classes. The following are the set of classes in this classification problem (the associated integer class label is listed in brackets). Followings are categories;</p><ul><li>T-shirt/top (0)</li><li>Trouser (1)</li><li>Pullover (2)</li><li>Dress (3)</li><li>Coat (4)</li><li>Sandal (5)</li><li>Shirt (6)</li><li>Sneaker (7)</li><li>Bag (8)</li><li>Ankle boot (9)</li></ul><p>For example, you can load the as follow;</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>tensorflow</span> <span style=font-weight:700>as</span> <span style=font-weight:700>tf</span>
+</span></span><span style=display:flex><span>fashion_mnist = tf.keras.datasets.fashion_mnist
+</span></span><span style=display:flex><span>(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
+</span></span></code></pre></div><p>Let us build a binary two layer classifier using the TensorFlow low level API. So we will extract two classes from the training and test data (map the associated labels to 0 and 1).
+For instance, let us say <strong>dress</strong> and <strong>bag</strong>. The integer class label for a dress is 3 and the integer class label for a bag is 8. We will extract all data related to just these two classes from the
+training and test data. Hence, our class labels for the train and test data will have the integer values 3 or 8. Now we will map all labels encoded as 3 to 0 and all labels encoded as 8 to 1. The reason for this is that the Sigmoid function is a binary classifier that can only outputs values between 0 and 1.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span><span style=font-style:italic># Extract only 3 and 8 from train dataset</span>
+</span></span><span style=display:flex><span>train_labels_new = train_labels[(train_labels == 3) | (train_labels == 8)]
+</span></span><span style=display:flex><span>train_images_new = train_images[(train_labels == 3) | (train_labels == 8)]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># Extract only 3 and 8 from test dataset</span>
+</span></span><span style=display:flex><span>test_labels_new = test_labels[(test_labels == 3) | (test_labels == 8)]
+</span></span><span style=display:flex><span>test_images_new = test_images[(test_labels == 3) | (test_labels == 8)]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># Reshape training dataset so that the features are flattened</span>
+</span></span><span style=display:flex><span>train_images_new = train_images_new.reshape(train_images_new.shape[0], -1).astype(<span style=font-style:italic>&#39;float32&#39;</span>)
+</span></span><span style=display:flex><span>test_images_new = test_images_new.reshape(test_images_new.shape[0], -1).astype(<span style=font-style:italic>&#39;float32&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic>#Normalized the data</span>
+</span></span><span style=display:flex><span>train_images_new = train_images_new / 255.0
+</span></span><span style=display:flex><span>test_images_new = test_images_new / 255.0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># encoding 3=0 and 8=1</span>
+</span></span><span style=display:flex><span>test_labels_new[test_labels_new == 3] = 0
+</span></span><span style=display:flex><span>test_labels_new[test_labels_new == 8] = 1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>train_labels_new[train_labels_new == 3] = 0
+</span></span><span style=display:flex><span>train_labels_new[train_labels_new == 8] = 1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic>#Reshape the label dataset</span>
+</span></span><span style=display:flex><span>test_labels_new = test_labels_new.reshape(1,-1)
+</span></span><span style=display:flex><span>train_labels_new = train_labels_new.reshape(1,-1)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic>#Transpose the train and test data</span>
+</span></span><span style=display:flex><span>train_images_new = train_images_new.T
+</span></span><span style=display:flex><span>test_images_new = test_images_new.T
+</span></span></code></pre></div><p>Now let us define the learning rate. The learning rate in Machine Learning is a hyperparameter that determines the step size at which the optimizer makes updates to the model parameters. It plays a vital role in training a model because it controls the speed and direction of the updates. If the learning rate is quite high, the model&rsquo;s parameters will be updated too quickly, causing the optimization to overshoot the minimum and converge slowly or even oscillate and never converge. On the other hand, if the learning rate is very low, the model&rsquo;s parameters will be updated too slowly, causing the optimization to converge slowly.</p><p>Setting an appropriate learning rate can make a big difference in the model&rsquo;s performance and the training time. In general, the learning rate should be set such that it strikes a balance between convergence speed and model performance. Finding an optimal learning rate is often an iterative process that involves experimenting with different values and observing their impact on the training process and the final model performance.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span>learningRate = 0.01
+</span></span><span style=display:flex><span><span style=font-style:italic># Define the placeholders to load our training and target labels.</span>
+</span></span><span style=display:flex><span>x = tf.placeholder(tf.float32, [train_images_new.shape[0], <span style=font-weight:700>None</span>])
+</span></span><span style=display:flex><span>y_ = tf.placeholder(tf.float32, [1, <span style=font-weight:700>None</span>])
+</span></span></code></pre></div><p>Also we will define our weight and bias matrix. Set Layer 1: 100 neurons (ReLu activation function) and Layer 2: 1 neuron (Sigmoid activation function).</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span><span style=font-style:italic># define our weight and bias matrix</span>
+</span></span><span style=display:flex><span>w = tf.Variable(tf.random_normal([train_images_new.shape[0],100], mean=0.0, stddev=0.8))
+</span></span><span style=display:flex><span>w_T = tf.transpose(w)
+</span></span><span style=display:flex><span>b = tf.Variable([0.])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic>#Multiply weight and bias matrix</span>
+</span></span><span style=display:flex><span>y_pred_1 = tf.matmul(w_T, x) + b
+</span></span><span style=display:flex><span><span style=font-style:italic>#pipe it through relu activation function</span>
+</span></span><span style=display:flex><span>layer1 = tf.nn.relu(y_pred_1)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># define our weight and bias matrix</span>
+</span></span><span style=display:flex><span>w1 = tf.Variable(tf.random_normal([100,1], mean=0.0, stddev=0.04))
+</span></span><span style=display:flex><span>w1_T = tf.transpose(w1)
+</span></span><span style=display:flex><span>b1 = tf.Variable([0.])
+</span></span><span style=display:flex><span><span style=font-style:italic>#Multiply weight and bias matrix</span>
+</span></span><span style=display:flex><span>y_pred_2 = tf.matmul(w1_T, layer1) + b1
+</span></span><span style=display:flex><span><span style=font-style:italic>#pipe it through sigmoid activation function</span>
+</span></span><span style=display:flex><span>y_pred_sigmoid = tf.sigmoid(y_pred_2)
+</span></span></code></pre></div><p>We will use <strong>tf.nn.sigmoid_cross_entropy_with_logits(logits=A2, labels=y)</strong>. The pre-activation values, also known as logits, of a neuron are fed into the Sigmoid activation function. This function maps the logits to probabilities between 0 and 1, which can then be used to make a prediction. The predicted values are then compared with the actual labels (y) and the cross entropy error is calculated for each instance in the training data. The cross entropy error is a measure of how well the predicted values match the true labels and will be used to guide the optimization process in training the neural network.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span><span style=font-style:italic># Get cross entropy error for all our training dataset</span>
+</span></span><span style=display:flex><span>x_entropy = tf.nn.sigmoid_cross_entropy_with_logits(logits=y_pred_2, labels=y_)
+</span></span><span style=display:flex><span><span style=font-style:italic># Get the mean cross entropy error</span>
+</span></span><span style=display:flex><span>loss = tf.reduce_mean(x_entropy)
+</span></span><span style=display:flex><span><span style=font-style:italic># Apply Gradient Descent to minimize the error.</span>
+</span></span><span style=display:flex><span>optimizer = tf.train.GradientDescentOptimizer(learningRate).minimize(loss)
+</span></span><span style=display:flex><span><span style=font-style:italic># Round off the predictions (0 or 1)</span>
+</span></span><span style=display:flex><span>predictions = tf.round(y_pred_sigmoid)
+</span></span><span style=display:flex><span>predictions_correct = tf.cast(tf.equal(predictions, y_), tf.float32)
+</span></span><span style=display:flex><span><span style=font-style:italic># Get the mean accuracy </span>
+</span></span><span style=display:flex><span>accuracy = tf.reduce_mean(predictions_correct)
+</span></span></code></pre></div><p>Now time to start the session;</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span>num_Iterations = 50
+</span></span><span style=display:flex><span><span style=font-style:italic># Start the session</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>with</span> tf.Session() <span style=font-weight:700>as</span> sess:
+</span></span><span style=display:flex><span>        <span style=font-style:italic># create lists to plot the graph</span>
+</span></span><span style=display:flex><span>        train_loss_list = []
+</span></span><span style=display:flex><span>        epoch_list = []
+</span></span><span style=display:flex><span>        train_acc_list = []
+</span></span><span style=display:flex><span>        start_time = time.time()
+</span></span><span style=display:flex><span>        <span style=font-style:italic># Initialize all variables</span>
+</span></span><span style=display:flex><span>        sess.run(tf.global_variables_initializer())
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=font-weight:700>for</span> i <span style=font-weight:700>in</span> range(num_Iterations):
+</span></span><span style=display:flex><span>            _, train_loss, train_acc  = sess.run([optimizer, loss, accuracy], feed_dict={x:train_images_new, y_:train_labels_new})
+</span></span><span style=display:flex><span>            train_loss_list.append(train_loss)
+</span></span><span style=display:flex><span>            epoch_list.append(i)
+</span></span><span style=display:flex><span>            train_acc_list.append(train_acc*100)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            print (<span style=font-style:italic>&#34;Epoch &#34;</span>, i, <span style=font-style:italic>&#34; Train Loss: &#34;</span>, train_loss, <span style=font-style:italic>&#34;  Train Acc: &#34;</span>, train_acc)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        duration = time.time() - start_time
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        pylab.plot(epoch_list, train_acc_list, <span style=font-style:italic>&#39;-ob&#39;</span>, label = <span style=font-style:italic>&#39;train_accuracy&#39;</span>)
+</span></span><span style=display:flex><span>        pylab.plot(epoch_list, train_loss_list, <span style=font-style:italic>&#39;purple&#39;</span>, label = <span style=font-style:italic>&#39;train_loss_list&#39;</span>)
+</span></span><span style=display:flex><span>        pylab.legend(loc=<span style=font-style:italic>&#39;bottom right&#39;</span>)
+</span></span><span style=display:flex><span>        plt.xlabel(<span style=font-style:italic>&#39;Epochs&#39;</span>)
+</span></span><span style=display:flex><span>        pylab.show()
+</span></span><span style=display:flex><span>        print(<span style=font-style:italic>&#34;Total time is: &#34;</span>, round(duration, 2), <span style=font-style:italic>&#34;seconds&#34;</span>)
+</span></span><span style=display:flex><span>        print (<span style=font-style:italic>&#34;Final Test Accuracy &#34;</span>, sess.run(accuracy*100, feed_dict={x:test_images_new, y_:test_labels_new}))
+</span></span></code></pre></div><p>You can easily get a 98% accuracy with the Fashion-MNIST dataset.</p></div><footer></footer></article></section></div><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></main><script src=https://AIThoughtLab.github.io/ThinkingAI/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script></body></html>
