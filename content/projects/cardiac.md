@@ -108,7 +108,7 @@ The following figure shows the full 3D rendered heart model in color heatmap wit
 
 **Marching Cube algorithm**
 
-In Marching Cube algorithm, the input data is a voxel information, ie, a scalar field //(V = f(x, y, z)//). It could be binary or not. If it is not a binary, the Marching Cube
+In Marching Cube algorithm, the input data is a voxel information, ie, a scalar field $$V = f(x, y, z)$$ It could be binary or not. If it is not a binary, the Marching Cube
 algorithms needs an additional parameter in order to distinct the sample points inside or outside the surface. For the binary model, the interior or the exterior points
 are separated and would obtain a surface like. If the model is not binary, we create a isosurface joining all the points from given isovalue. The figure below shows the points joining by the isovalues to form level surfaces (in this case level lines) that maps from $$R^{3} \Rightarrow R$$
 
