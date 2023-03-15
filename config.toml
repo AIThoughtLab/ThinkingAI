@@ -17,7 +17,7 @@ author = "Mohamed ABDUL GAFOOR"
 # license = '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA-4.0</a>'
 description = "Mohamed's personal website"
 keywords = "blog,developer,personal"
-info = ["Machine Learning", "Deep Learning", "Virtual Reality", "Quantum AI", "Physics-based Learning"]
+info = ["Machine Learning", "Deep Learning", "Virtual Reality", "Quantum AI", "Physics-Informed Neural Networks (PINN)"]
 avatarURL = "images/mohamed.jpg"
 #gravatar = "john.doe@example.com"
 dateFormat = "January 2, 2006"
@@ -144,18 +144,23 @@ weight = 3
 url = "projects/"
 
 [[languages.en.menu.main]]
-name = "Innovations"
+name = "PINN"
 weight = 4
+url = "physics/"
+
+[[languages.en.menu.main]]
+name = "Innovations"
+weight = 5
 url = "innovations/"
 
 [[languages.en.menu.main]]
 name = "Personal"
-weight = 5
+weight = 6
 url = "personal/"
 
 [[languages.en.menu.main]]
 name = "Contact me"
-weight = 6
+weight = 7
 url = "contact/"
 
 
