@@ -1,0 +1,32 @@
+<video class="video-shortcode" preload="{{ .Get "preload" }}" controls>
+    <source src="{{ .Get "src" }}" type="{{ .Get "type" }}">
+    There should have been a video here but your browser does not seem
+    to support it.
+</video>
+
+
+
+<!---
+<div class="container">
+  <div id="player-wrapper" class="{{ .Get 1 }}"></div>
+</div>
+
+<script 
+  type="text/javascript" 
+  src="https://cdn.jsdelivr.net/npm/@clappr/player@latest/dist/clappr.min.js"
+>
+</script>
+
+<script>
+  var playerElement = document.getElementById("player-wrapper");
+
+  var player = new Clappr.Player({
+    source: {{ .Get 0 }},
+    mute: true,
+    height: 360,
+    width: 640
+  });
+
+  player.attachTo(playerElement);  
+</script>
+-->
