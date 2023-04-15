@@ -128,7 +128,7 @@ Integrating the Dempster-Shafer theory into deep learning can help improve the r
 
 **Conclusion**
 
-In summary, incorporating the DST into deep learning can help us better handle uncertainty and improve the interpretability of our models, leading to more robust and reliable predictions in situations with incomplete or ambiguous data.
+In summary, incorporating the DST into deep learning can help us better handle uncertainty and improve the interpretability of our models, leading to more robust and reliable predictions in situations with incomplete or ambiguous data..
 
 
 
