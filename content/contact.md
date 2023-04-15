@@ -5,7 +5,6 @@ slug = "contact"
 
 My physical location is:
 
-* Latitude: 46° N to 51° N
-* Longitude: 6° W to 10° E
+* 48°56'15.4"N 2°09'29.0"E
 
 Email me at: itubephysics@gmail.com
