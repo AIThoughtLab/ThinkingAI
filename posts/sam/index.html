@@ -1,0 +1,160 @@
+<!doctype html><html lang=en><head><title>Revolutionizing Segmentation: Introducing the Segment Anything Model (SAM) · AI for HUMANITY</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="Mohamed ABDUL GAFOOR"><meta name=description content="In this post, we will be discussing the MetaAI release of the Segment Anything Model (SAM). This is a highly potent framework with the ability to be implemented across a broad range of scientific and technological domains. For those interested in learning more about SAM, please visit the website SAM.
+Computer vision has relied heavily on segmentation, the process of identifying which image pixels belong to an object. However, creating an accurate segmentation model for specific tasks usually requires specialized technical experts and large volumes of carefully annotated in-domain data."><meta name=keywords content="blog,developer,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="Revolutionizing Segmentation: Introducing the Segment Anything Model (SAM)"><meta name=twitter:description content="In this post, we will be discussing the MetaAI release of the Segment Anything Model (SAM). This is a highly potent framework with the ability to be implemented across a broad range of scientific and technological domains. For those interested in learning more about SAM, please visit the website SAM.
+Computer vision has relied heavily on segmentation, the process of identifying which image pixels belong to an object. However, creating an accurate segmentation model for specific tasks usually requires specialized technical experts and large volumes of carefully annotated in-domain data."><meta property="og:title" content="Revolutionizing Segmentation: Introducing the Segment Anything Model (SAM)"><meta property="og:description" content="In this post, we will be discussing the MetaAI release of the Segment Anything Model (SAM). This is a highly potent framework with the ability to be implemented across a broad range of scientific and technological domains. For those interested in learning more about SAM, please visit the website SAM.
+Computer vision has relied heavily on segmentation, the process of identifying which image pixels belong to an object. However, creating an accurate segmentation model for specific tasks usually requires specialized technical experts and large volumes of carefully annotated in-domain data."><meta property="og:type" content="article"><meta property="og:url" content="https://AIThoughtLab.github.io/ThinkingAI/posts/sam/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-04-18T00:00:00+00:00"><meta property="article:modified_time" content="2023-04-18T00:00:00+00:00"><link rel=canonical href=https://AIThoughtLab.github.io/ThinkingAI/posts/sam/><link rel=preload href="https://AIThoughtLab.github.io/ThinkingAI/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=https://AIThoughtLab.github.io/ThinkingAI/css/coder.min.36f76aaf39a14ecf5c3a3c6250dcaf06c238b3d8365d17d646f95cb1874e852b.css integrity="sha256-NvdqrzmhTs9cOjxiUNyvBsI4s9g2XRfWRvlcsYdOhSs=" crossorigin=anonymous media=screen><link rel=stylesheet href=https://AIThoughtLab.github.io/ThinkingAI/css/coder-dark.min.593028e7f7ac55c003b79c230d1cd411bb4ca53b31556c3abb7f027170e646e9.css integrity="sha256-WTAo5/esVcADt5wjDRzUEbtMpTsxVWw6u38CcXDmRuk=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=https://AIThoughtLab.github.io/ThinkingAI/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=https://AIThoughtLab.github.io/ThinkingAI/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=https://AIThoughtLab.github.io/ThinkingAI/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=https://AIThoughtLab.github.io/ThinkingAI/images/apple-touch-icon.png><link rel=manifest href=https://AIThoughtLab.github.io/ThinkingAI/site.webmanifest><link rel=mask-icon href=https://AIThoughtLab.github.io/ThinkingAI/images/safari-pinned-tab.svg color=#5bbad5><meta name=generator content="Hugo 0.111.3"></head><body class="preload-transitions colorscheme-dark"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://AIThoughtLab.github.io/ThinkingAI/>AI for HUMANITY</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/about/>About</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/projects/>Projects</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/physics/>PINN</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/innovations/>Innovations</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/personal/>Personal</a></li><li class=navigation-item><a class=navigation-link href=https://AIThoughtLab.github.io/ThinkingAI/contact/>Contact me</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://AIThoughtLab.github.io/ThinkingAI/posts/sam/>Revolutionizing Segmentation: Introducing the Segment Anything Model (SAM)</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2023-04-18T00:00:00Z>April 18, 2023</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+5-minute read</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=https://AIThoughtLab.github.io/ThinkingAI/categories/artificial-intelligence/>Artificial Intelligence</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=https://AIThoughtLab.github.io/ThinkingAI/tags/segmentation/>Segmentation</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=https://AIThoughtLab.github.io/ThinkingAI/tags/machine-learning/>Machine Learning</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=https://AIThoughtLab.github.io/ThinkingAI/tags/deep-learning/>Deep Learning</a></span></div></div></header><div class=post-content><p>In this post, we will be discussing the MetaAI release of the Segment Anything Model (SAM). This is a highly potent framework with the ability to be implemented across a broad range of scientific and technological domains. For those interested in learning more about SAM, please visit the website <a href=https://segment-anything.com/>SAM.</a></p><p>Computer vision has relied heavily on segmentation, the process of identifying which image pixels belong to an object. However, creating an accurate segmentation model for specific tasks usually requires specialized technical experts and large volumes of carefully annotated in-domain data. The Segment Anything Model aims to democratize segmentation and reduce the need for task-specific modeling expertise, training, and custom data annotation.</p><p>SAM has learned a general notion of what objects are, and it can generate masks for any object in any image or video, even including objects and image types that it had not encountered during training. SAM is general enough to cover a broad set of use cases and can be used out of the box on new image &ldquo;domains&rdquo; without requiring additional training. This capability is often referred to as zero-shot transfer. To create a dataset to train SAM, the Segment Anything project has developed the Segment Anything 1-Billion mask dataset (SA-1B), the largest-ever segmentation dataset. SA-1B is a highly diverse dataset, covering a wide range of object types, image types, and contexts.</p><p><strong>SAM overview</strong></p><p>The Segment Anything Model (SAM) is a framework for image segmentation that utilizes an image encoder to output an image embedding. This image embedding is then used by a lightweight encoder to efficiently generate object masks based on various input prompts. The input prompts can include foreground/background points, rough boxes or masks, freeform text, or any information indicating what to segment in an image.</p><p>SAM is capable of handling ambiguous prompts, which correspond to more than one object. In such cases, the model can output multiple valid masks, each associated with a confidence score. The image encoder and decoder are designed to operate in real-time, allowing for quick and efficient segmentation of images. This makes SAM a highly potent tool for a broad range of scientific and technological applications, as it simplifies the process of segmenting images and requires minimal technical expertise. It has three main components, image encoder, prompt encoder and mask decoder <a href="https://scontent-cdg4-2.xx.fbcdn.net/v/t39.2365-6/10000000_900554171201033_1602411987825904100_n.pdf?_nc_cat=100&amp;ccb=1-7&_nc_sid=3c67a6&_nc_ohc=F08W4cSoXYUAX-fJcX-&_nc_ht=scontent-cdg4-2.xx&amp;oh=00_AfBfiRtGEmYW_vHzx4izg2R8vGsGEVLSgf_JRO3D6imSGA&amp;oe=6442D8A7">paper.</a></p><figure class=center><img src=https://AIThoughtLab.github.io/ThinkingAI/images/sam.png></figure><p>To evaluate the performance of SAM, we will utilize Google Colab. Install the following libraries using pip.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span>%%capture
+</span></span><span style=display:flex><span><span>!</span>pip install git+https://github.com/facebookresearch/segment-anything.git
+</span></span><span style=display:flex><span><span>!</span>pip install opencv-python pycocotools matplotlib onnxruntime onnx
+</span></span><span style=display:flex><span><span>!</span>pip install jupyter_bbox_widget
+</span></span></code></pre></div><p>We use the following versions..</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span>PyTorch version: 2.0.0+cu118
+</span></span><span style=display:flex><span>Torchvision version: 0.15.1+cu118
+</span></span><span style=display:flex><span>CUDA <span style=font-weight:700>is</span> available: <span style=font-weight:700>True</span>
+</span></span></code></pre></div><p>Import the following libraries;</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>cv2</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>numpy</span> <span style=font-weight:700>as</span> <span style=font-weight:700>np</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>PIL</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>io</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>html</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>time</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>sys</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>torch</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>torchvision</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>matplotlib.pyplot</span> <span style=font-weight:700>as</span> <span style=font-weight:700>plt</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>from</span> <span style=font-weight:700>segment_anything</span> <span style=font-weight:700>import</span> sam_model_registry, SamAutomaticMaskGenerator, SamPredictor
+</span></span><span style=display:flex><span><span style=font-weight:700>from</span> <span style=font-weight:700>google.colab.patches</span> <span style=font-weight:700>import</span> cv2_imshow
+</span></span><span style=display:flex><span><span style=font-weight:700>from</span> <span style=font-weight:700>google.colab</span> <span style=font-weight:700>import</span> output
+</span></span><span style=display:flex><span><span style=font-weight:700>from</span> <span style=font-weight:700>jupyter_bbox_widget</span> <span style=font-weight:700>import</span> BBoxWidget
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=font-weight:700>base64</span>
+</span></span></code></pre></div><p>We will define the following functions. These functions were extracted from SAM github <a href=https://github.com/facebookresearch/segment-anything>page.</a></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span><span style=font-weight:700>def</span> show_mask(mask, ax, random_color=<span style=font-weight:700>False</span>):
+</span></span><span style=display:flex><span>    <span style=font-weight:700>if</span> random_color:
+</span></span><span style=display:flex><span>        color = np.concatenate([np.random.random(3), np.array([0.6])], axis=0)
+</span></span><span style=display:flex><span>    <span style=font-weight:700>else</span>:
+</span></span><span style=display:flex><span>        color = np.array([30/255, 144/255, 255/255, 0.6])
+</span></span><span style=display:flex><span>    h, w = mask.shape[-2:]
+</span></span><span style=display:flex><span>    mask_image = mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
+</span></span><span style=display:flex><span>    ax.imshow(mask_image)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=font-weight:700>def</span> show_points(coords, labels, ax, marker_size=375):
+</span></span><span style=display:flex><span>    pos_points = coords[labels==1]
+</span></span><span style=display:flex><span>    neg_points = coords[labels==0]
+</span></span><span style=display:flex><span>    ax.scatter(pos_points[:, 0], pos_points[:, 1], color=<span style=font-style:italic>&#39;green&#39;</span>, marker=<span style=font-style:italic>&#39;*&#39;</span>, s=marker_size, edgecolor=<span style=font-style:italic>&#39;white&#39;</span>, linewidth=1.25)
+</span></span><span style=display:flex><span>    ax.scatter(neg_points[:, 0], neg_points[:, 1], color=<span style=font-style:italic>&#39;red&#39;</span>, marker=<span style=font-style:italic>&#39;*&#39;</span>, s=marker_size, edgecolor=<span style=font-style:italic>&#39;white&#39;</span>, linewidth=1.25)   
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=font-weight:700>def</span> show_box(box, ax):
+</span></span><span style=display:flex><span>    x0, y0 = box[0], box[1]
+</span></span><span style=display:flex><span>    w, h = box[2] - box[0], box[3] - box[1]
+</span></span><span style=display:flex><span>    ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor=<span style=font-style:italic>&#39;green&#39;</span>, facecolor=(0,0,0,0), lw=2))   
+</span></span></code></pre></div><p>Let us load few images and draw a boundingbox;</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span>imPath = <span style=font-style:italic>&#39;./ele.png&#39;</span>
+</span></span><span style=display:flex><span>img = cv2.imread(imPath)
+</span></span><span style=display:flex><span>cv2_imshow(img)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>def</span> encode_image(filepath):
+</span></span><span style=display:flex><span>    <span style=font-weight:700>with</span> open(filepath, <span style=font-style:italic>&#39;rb&#39;</span>) <span style=font-weight:700>as</span> f:
+</span></span><span style=display:flex><span>        image_bytes = f.read()
+</span></span><span style=display:flex><span>    encoded = str(base64.b64encode(image_bytes), <span style=font-style:italic>&#39;utf-8&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=font-weight:700>return</span> <span style=font-style:italic>&#34;data:image/jpg;base64,&#34;</span>+encoded
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=font-weight:700>if</span> using_colab:
+</span></span><span style=display:flex><span>    output.enable_custom_widget_manager()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>widget = BBoxWidget()
+</span></span><span style=display:flex><span>widget.image = encode_image(imPath)
+</span></span><span style=display:flex><span>widget
+</span></span></code></pre></div><p>Now we must provide path to the weight and model type. There are 3 weights and types (<a href=https://github.com/facebookresearch/segment-anything>here</a>);</p><ul><li>default or vit_h: ViT-H SAM model.</li><li>vit_l: ViT-L SAM model.</li><li>vit_b: ViT-B SAM model.</li></ul><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span>coordinates = widget.bboxes
+</span></span><span style=display:flex><span>x, y, w, h = coordinates[0][<span style=font-style:italic>&#39;x&#39;</span>], coordinates[0][<span style=font-style:italic>&#39;y&#39;</span>], coordinates[0][<span style=font-style:italic>&#39;width&#39;</span>], coordinates[0][<span style=font-style:italic>&#39;height&#39;</span>]
+</span></span><span style=display:flex><span>input_box = np.array([x, y, x + w, y + h])
+</span></span><span style=display:flex><span>input_label = np.array([0])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>def</span> sam_BB(image, input_box):
+</span></span><span style=display:flex><span>  sam_checkpoint = <span style=font-style:italic>&#34;./sam_vit_h_4b8939.pth&#34;</span>
+</span></span><span style=display:flex><span>  model_type = <span style=font-style:italic>&#34;vit_h&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  DEVICE = torch.device(<span style=font-style:italic>&#39;cuda:0&#39;</span> <span style=font-weight:700>if</span> torch.cuda.is_available() <span style=font-weight:700>else</span> <span style=font-style:italic>&#39;cpu&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
+</span></span><span style=display:flex><span>  sam.to(device=DEVICE)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  predictor = SamPredictor(sam)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  predictor.set_image(image)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  masks, _, _ = predictor.predict(
+</span></span><span style=display:flex><span>                point_coords=<span style=font-weight:700>None</span>,
+</span></span><span style=display:flex><span>                point_labels=<span style=font-weight:700>None</span>,
+</span></span><span style=display:flex><span>                box=input_box[<span style=font-weight:700>None</span>, :],
+</span></span><span style=display:flex><span>                multimask_output=<span style=font-weight:700>False</span>,)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+</span></span><span style=display:flex><span>  plt.figure(figsize=(10, 10))
+</span></span><span style=display:flex><span>  plt.imshow(image)
+</span></span><span style=display:flex><span>  show_mask(masks[0], plt.gca())
+</span></span><span style=display:flex><span>  show_box(input_box, plt.gca())
+</span></span><span style=display:flex><span>  plt.axis(<span style=font-style:italic>&#39;off&#39;</span>)
+</span></span><span style=display:flex><span>  plt.show()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>sam_BB(img, input_box)
+</span></span></code></pre></div><p>Following are the segmented images within the boundingbox;<figure class=center><img src=https://AIThoughtLab.github.io/ThinkingAI/images/seg1.png></figure></p><p>Now we will test the performance of automatically generating object masks with SAM.. For this purpose few biological samples were tested;</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=display:flex><span><span style=font-weight:700>def</span> sam_AUTO(image):
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=font-style:italic>#sys.path.append(&#34;..&#34;)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  sam_checkpoint = <span style=font-style:italic>&#34;./sam_vit_h_4b8939.pth&#34;</span>
+</span></span><span style=display:flex><span>  model_type = <span style=font-style:italic>&#34;vit_h&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  DEVICE = torch.device(<span style=font-style:italic>&#39;cuda:0&#39;</span> <span style=font-weight:700>if</span> torch.cuda.is_available() <span style=font-weight:700>else</span> <span style=font-style:italic>&#39;cpu&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
+</span></span><span style=display:flex><span>  sam.to(device=DEVICE)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  mask_generator = SamAutomaticMaskGenerator(model = sam,
+</span></span><span style=display:flex><span>                                              points_per_side = 32,
+</span></span><span style=display:flex><span>                                              points_per_batch = 64,
+</span></span><span style=display:flex><span>                                              pred_iou_thresh = 0.6,
+</span></span><span style=display:flex><span>                                              stability_score_thresh = 0.75,
+</span></span><span style=display:flex><span>                                              crop_n_layers=1,
+</span></span><span style=display:flex><span>                                              crop_n_points_downscale_factor=2,
+</span></span><span style=display:flex><span>                                              min_mask_region_area=100,  <span style=font-style:italic># Requires open-cv to run post-processing</span>
+</span></span><span style=display:flex><span>                                              )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  img_bgr = cv2.imread(image)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=font-style:italic># Get the original dimensions</span>
+</span></span><span style=display:flex><span>  height, width = img_bgr.shape[:2]
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  new_height = int(height / 1)
+</span></span><span style=display:flex><span>  new_width = int(width / 1)
+</span></span><span style=display:flex><span>  img_bgr = cv2.resize(img_bgr, (new_width, new_height))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  masks = mask_generator.generate(img_rgb)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=font-weight:700>return</span> masks
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># Plot masks</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>def</span> show_anns(anns):
+</span></span><span style=display:flex><span>    <span style=font-weight:700>if</span> len(anns) == 0:
+</span></span><span style=display:flex><span>        <span style=font-weight:700>return</span>
+</span></span><span style=display:flex><span>    sorted_anns = sorted(anns, key=(<span style=font-weight:700>lambda</span> x: x[<span style=font-style:italic>&#39;area&#39;</span>]), reverse=<span style=font-weight:700>True</span>)
+</span></span><span style=display:flex><span>    ax = plt.gca()
+</span></span><span style=display:flex><span>    ax.set_autoscale_on(<span style=font-weight:700>False</span>)
+</span></span><span style=display:flex><span>    polygons = []
+</span></span><span style=display:flex><span>    color = []
+</span></span><span style=display:flex><span>    <span style=font-weight:700>for</span> ann <span style=font-weight:700>in</span> sorted_anns:
+</span></span><span style=display:flex><span>        m = ann[<span style=font-style:italic>&#39;segmentation&#39;</span>]
+</span></span><span style=display:flex><span>        img = np.ones((m.shape[0], m.shape[1], 3))
+</span></span><span style=display:flex><span>        color_mask = np.random.random((1, 3)).tolist()[0]
+</span></span><span style=display:flex><span>        <span style=font-weight:700>for</span> i <span style=font-weight:700>in</span> range(3):
+</span></span><span style=display:flex><span>            img[:,:,i] = color_mask[i]
+</span></span><span style=display:flex><span>        ax.imshow(np.dstack((img, m*0.35)))
+</span></span><span style=display:flex><span>        
+</span></span></code></pre></div><p>The following images were captured under Creative Commons licenses, and the results are very impressive!</p><figure class=center><img src=https://AIThoughtLab.github.io/ThinkingAI/images/bio.png></figure><p><strong>Conclusion</strong></p><p>In conclusion, the paper highlights how Segment Anything&rsquo;s zero-shot capabilities are a significant breakthrough in image segmentation. Although SAM can improve data labeling efficiency and accuracy, human validation remains necessary to ensure that the output aligns with the specific needs and goals of each ML project. To improve the efficiency and accuracy, it is important to combine advanced AI models and human-in-the-loop to fully unlock the potential of machine learning.</p><p><strong>Reference</strong></p><ul><li><a href=https://github.com/facebookresearch/segment-anything>https://github.com/facebookresearch/segment-anything</a></li><li><a href=https://github.com/gereleth/jupyter-bbox-widget>https://github.com/gereleth/jupyter-bbox-widget</a></li></ul></div><footer></footer></article></section></div><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></main><script src=https://AIThoughtLab.github.io/ThinkingAI/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script></body></html>
